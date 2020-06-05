@@ -1,0 +1,26 @@
+.homePageContainer {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url("../../images/blackjackBackground-min.jpg");
+    background-size: cover;
+}
+
+.contentContainerHomePage {
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-radius: 15px;
+    width: 70%;
+    height: 70%;
+    color: gold;
+}
+
+.titleHomePage {
+    margin: 0;
+    font-family: Abril, serif;
+}

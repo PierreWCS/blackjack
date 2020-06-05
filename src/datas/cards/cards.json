@@ -1,0 +1,369 @@
+[
+  {
+    "name": "Ace of diamonds",
+    "family": "diamonds",
+    "value": 1,
+    "power": 11,
+    "img": "AD.png"
+  },
+  {
+    "name": "2 of diamonds",
+    "family": "diamonds",
+    "value": 2,
+    "power": 2,
+    "img": "2D.png"
+  },
+  {
+    "name": "3 of diamonds",
+    "family": "diamonds",
+    "value": 3,
+    "power": 3,
+    "img": "3D.png"
+  },
+  {
+    "name": "4 of diamonds",
+    "family": "diamonds",
+    "value": 4,
+    "power": 4,
+    "img": "4D.png"
+  },
+  {
+    "name": "5 of diamonds",
+    "family": "diamonds",
+    "value": 5,
+    "power": 5,
+    "img": "5D.png"
+  },
+  {
+    "name": "6 of diamonds",
+    "family": "diamonds",
+    "value": 6,
+    "power": 6,
+    "img": "6D.png"
+  },
+  {
+    "name": "7 of diamonds",
+    "family": "diamonds",
+    "value": 7,
+    "power": 7,
+    "img": "7D.png"
+  },
+  {
+    "name": "8 of diamonds",
+    "family": "diamonds",
+    "value": 8,
+    "power": 8,
+    "img": "8D.png"
+  },
+  {
+    "name": "9 of diamonds",
+    "family": "diamonds",
+    "value": 9,
+    "power": 9,
+    "img": "9D.png"
+  },
+  {
+    "name": "10 of diamonds",
+    "family": "diamonds",
+    "value": 10,
+    "power": 10,
+    "img": "10D.png"
+  },
+  {
+    "name": "Jack of diamonds",
+    "family": "diamonds",
+    "value": 11,
+    "power": 10,
+    "img": "JD.png"
+  },
+  {
+    "name": "Queen of diamonds",
+    "family": "diamonds",
+    "value": 12,
+    "power": 10,
+    "img": "QD.png"
+  },
+  {
+    "name": "King of diamonds",
+    "family": "diamonds",
+    "value": 13,
+    "power": 10,
+    "img": "KD.png"
+  },
+
+  {
+    "name": "Ace of hearths",
+    "family": "hearths",
+    "value": 1,
+    "power": 11,
+    "img": "AH.png"
+  },
+  {
+    "name": "2 of hearths",
+    "family": "hearths",
+    "value": 2,
+    "power": 2,
+    "img": "2H.png"
+  },
+  {
+    "name": "3 of hearths",
+    "family": "hearths",
+    "value": 3,
+    "power": 3,
+    "img": "3H.png"
+  },
+  {
+    "name": "4 of hearths",
+    "family": "hearths",
+    "value": 4,
+    "power": 4,
+    "img": "4H.png"
+  },
+  {
+    "name": "5 of hearths",
+    "family": "hearths",
+    "value": 5,
+    "power": 5,
+    "img": "5H.png"
+  },
+  {
+    "name": "6 of hearths",
+    "family": "hearths",
+    "value": 6,
+    "power": 6,
+    "img": "6H.png"
+  },
+  {
+    "name": "7 of hearths",
+    "family": "hearths",
+    "value": 7,
+    "power": 7,
+    "img": "7H.png"
+  },
+  {
+    "name": "8 of hearths",
+    "family": "hearths",
+    "value": 8,
+    "power": 8,
+    "img": "8H.png"
+  },
+  {
+    "name": "9 of hearths",
+    "family": "hearths",
+    "value": 9,
+    "power": 9,
+    "img": "9H.png"
+  },
+  {
+    "name": "10 of hearths",
+    "family": "hearths",
+    "value": 10,
+    "power": 10,
+    "img": "10H.png"
+  },
+  {
+    "name": "Jack of hearths",
+    "family": "hearths",
+    "value": 11,
+    "power": 10,
+    "img": "JH.png"
+  },
+  {
+    "name": "Queen of hearths",
+    "family": "hearths",
+    "value": 12,
+    "power": 10,
+    "img": "QH.png"
+  },
+  {
+    "name": "King of hearths",
+    "family": "hearths",
+    "value": 13,
+    "power": 10,
+    "img": "KH.png"
+  },
+
+  {
+    "name": "Ace of spades",
+    "family": "spades",
+    "value": 1,
+    "power": 11,
+    "img": "AS.png"
+  },
+  {
+    "name": "2 of spades",
+    "family": "spades",
+    "value": 2,
+    "power": 2,
+    "img": "2S.png"
+  },
+  {
+    "name": "3 of spades",
+    "family": "spades",
+    "value": 3,
+    "power": 3,
+    "img": "3S.png"
+  },
+  {
+    "name": "4 of spades",
+    "family": "spades",
+    "value": 4,
+    "power": 4,
+    "img": "4S.png"
+  },
+  {
+    "name": "5 of spades",
+    "family": "spades",
+    "value": 5,
+    "power": 5,
+    "img": "5S.png"
+  },
+  {
+    "name": "6 of spades",
+    "family": "spades",
+    "value": 6,
+    "power": 6,
+    "img": "6S.png"
+  },
+  {
+    "name": "7 of spades",
+    "family": "spades",
+    "value": 7,
+    "power": 7,
+    "img": "7S.png"
+  },
+  {
+    "name": "8 of spades",
+    "family": "spades",
+    "value": 8,
+    "power": 8,
+    "img": "8S.png"
+  },
+  {
+    "name": "9 of spades",
+    "family": "spades",
+    "value": 9,
+    "power": 9,
+    "img": "9S.png"
+  },
+  {
+    "name": "10 of spades",
+    "family": "spades",
+    "value": 10,
+    "power": 10,
+    "img": "10S.png"
+  },
+  {
+    "name": "Jack of spades",
+    "family": "spades",
+    "value": 11,
+    "power": 10,
+    "img": "JS.png"
+  },
+  {
+    "name": "Queen of spades",
+    "family": "spades",
+    "value": 12,
+    "power": 10,
+    "img": "QS.png"
+  },
+  {
+    "name": "King of spades",
+    "family": "spades",
+    "value": 13,
+    "power": 10,
+    "img": "KS.png"
+  },
+
+  {
+    "name": "Ace of clubs",
+    "family": "clubs",
+    "value": 1,
+    "power": 11,
+    "img": "AC.png"
+  },
+  {
+    "name": "2 of clubs",
+    "family": "clubs",
+    "value": 2,
+    "power": 2,
+    "img": "2C.png"
+  },
+  {
+    "name": "3 of clubs",
+    "family": "clubs",
+    "value": 3,
+    "power": 3,
+    "img": "3C.png"
+  },
+  {
+    "name": "4 of clubs",
+    "family": "clubs",
+    "value": 4,
+    "power": 4,
+    "img": "4C.png"
+  },
+  {
+    "name": "5 of clubs",
+    "family": "clubs",
+    "value": 5,
+    "power": 5,
+    "img": "5C.png"
+  },
+  {
+    "name": "6 of clubs",
+    "family": "clubs",
+    "value": 6,
+    "power": 6,
+    "img": "6C.png"
+  },
+  {
+    "name": "7 of clubs",
+    "family": "clubs",
+    "value": 7,
+    "power": 7,
+    "img": "7C.png"
+  },
+  {
+    "name": "8 of clubs",
+    "family": "clubs",
+    "value": 8,
+    "power": 8,
+    "img": "8C.png"
+  },
+  {
+    "name": "9 of clubs",
+    "family": "clubs",
+    "value": 9,
+    "power": 9,
+    "img": "9C.png"
+  },
+  {
+    "name": "10 of clubs",
+    "family": "clubs",
+    "value": 10,
+    "power": 10,
+    "img": "10C.png"
+  },
+  {
+    "name": "Jack of clubs",
+    "family": "clubs",
+    "value": 11,
+    "power": 10,
+    "img": "JC.png"
+  },
+  {
+    "name": "Queen of clubs",
+    "family": "clubs",
+    "value": 12,
+    "power": 10,
+    "img": "QC.png"
+  },
+  {
+    "name": "King of clubs",
+    "family": "clubs",
+    "value": 13,
+    "power": 10,
+    "img": "KC.png"
+  }
+]
