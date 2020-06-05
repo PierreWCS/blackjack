@@ -78,6 +78,14 @@ const GameScreen = () => {
     }
   };
 
+  const resetGame = function () {
+    setPlayerCards([]);
+    setPlayerDeckValue(null);
+    setBankCards([]);
+    setGameDeck(CardsDeck.getDeck());
+    setGameScore(null);
+  };
+
   return (
     <div className="gameScreenContainer">
       <div className="gameArea">
@@ -133,7 +141,9 @@ const GameScreen = () => {
                   <button className="stopButton">Stop</button>
                 </div>
               ) : (
-                <button className="newGameButton">New game</button>
+                <button className="newGameButton" onClick={resetGame}>
+                  New game
+                </button>
               )}
             </div>
 
