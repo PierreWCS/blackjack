@@ -6,6 +6,8 @@ const GameScreen = () => {
   const [gameDeck, setGameDeck] = useState(null);
   const [bankCards, setBankCards] = useState([]);
   const [playerCards, setPlayerCards] = useState([]);
+  const [playerDeckValue, setPlayerDeckValue] = useState(0);
+  const [gameScore, setGameScore] = useState(null);
 
   useEffect(() => {
     // Create deck
@@ -14,66 +16,64 @@ const GameScreen = () => {
     console.log("Random deck :", deck);
   }, []);
 
-  const givePlayerCards = function async() {
-    // If the player has no cards
-    if (playerCards.length < 2) {
-      let initPlayerDeck = [];
-      // Pick card 1
-      let firstPick = CardsDeck.getCardFromDeck(gameDeck);
-      initPlayerDeck.push(firstPick.card);
-      setPlayerCards(initPlayerDeck);
-      setGameDeck(firstPick.deck);
+  const getCards = function () {
+    let initPlayerDeck = [];
 
-      // Then pick card 2
-      let secondPick = CardsDeck.getCardFromDeck(gameDeck);
-      initPlayerDeck.push(secondPick.card);
-      setGameDeck(secondPick.deck);
+    // Pick card 1
+    let firstPick = CardsDeck.getCardFromDeck(gameDeck);
+    initPlayerDeck.push(firstPick.card);
+    setPlayerCards(initPlayerDeck);
+    setGameDeck(firstPick.deck);
 
-      //  Set the player deck with the picked cards
-      setPlayerCards(initPlayerDeck);
+    // Then pick card 2
+    let secondPick = CardsDeck.getCardFromDeck(gameDeck);
+    initPlayerDeck.push(secondPick.card);
+    setGameDeck(secondPick.deck);
 
-      // Set the bank cards
-      let bankInit = [];
+    // Set the player deck with the picked cards
+    setPlayerCards(initPlayerDeck);
 
-      // First card of the bank
-      let bankFirstPick = CardsDeck.getCardFromDeck(gameDeck);
-      setGameDeck(bankFirstPick.deck);
-      bankInit.push(bankFirstPick.card);
+    // Set the value of the deck
+    let deckValue = initPlayerDeck[0].power + initPlayerDeck[1].power;
+    setPlayerDeckValue(deckValue);
 
-      // Second card of the bank
-      let bankSecondPick = CardsDeck.getCardFromDeck(gameDeck);
-      setGameDeck(bankSecondPick.deck);
-      bankInit.push(bankSecondPick.card);
+    // Set the bank cards
+    let bankInit = [];
 
-      setBankCards(bankInit);
-    }
+    // First card of the bank
+    let bankFirstPick = CardsDeck.getCardFromDeck(gameDeck);
+    setGameDeck(bankFirstPick.deck);
+    bankInit.push(bankFirstPick.card);
 
-    // If the player wants a third card
-    else if (playerCards.length < 3) {
-      console.log("coucou je veux une 3e carte");
-      let thirdPick = CardsDeck.getCardFromDeck(gameDeck);
-      let stockPlayerCards = playerCards;
-      stockPlayerCards.push(thirdPick.card);
-      setGameDeck(thirdPick.deck);
+    // Second card of the bank
+    let bankSecondPick = CardsDeck.getCardFromDeck(gameDeck);
+    setGameDeck(bankSecondPick.deck);
+    bankInit.push(bankSecondPick.card);
 
-      // Set the player deck with the third pick
-      setPlayerCards([...stockPlayerCards]);
-      console.log(playerCards);
-      console.log(gameDeck);
-    }
+    setBankCards(bankInit);
+  };
 
-    //  If the player wants a fourth card
-    else if (playerCards.length < 4) {
-      console.log("coucou je veux une 4e carte");
-      let fourthPick = CardsDeck.getCardFromDeck(gameDeck);
-      let stockPlayerCards = playerCards;
-      stockPlayerCards.push(fourthPick.card);
-      setGameDeck(fourthPick.deck);
+  const givePlayerNewCard = function async() {
+    console.log("I want another card");
+    let pickFromDeck = CardsDeck.getCardFromDeck(gameDeck);
 
-      // Set the player deck with the third pick
-      setPlayerCards([...stockPlayerCards]);
-      console.log(gameDeck);
-      console.log(playerCards);
+    let stockPlayerCards = playerCards;
+    stockPlayerCards.push(pickFromDeck.card);
+    setGameDeck(pickFromDeck.deck);
+    setPlayerCards([...stockPlayerCards]);
+
+    // Verifying the power of the deck
+    let countPower = playerDeckValue + pickFromDeck.card.power;
+    console.log(countPower);
+
+    if (countPower > 21) {
+      setPlayerDeckValue(countPower);
+      setGameScore("loose");
+      alert("BUSTED");
+    } else if (countPower === 21) {
+      alert("You reached 21 !");
+    } else {
+      setPlayerDeckValue(countPower);
     }
   };
 
@@ -104,15 +104,36 @@ const GameScreen = () => {
             })}
           </div>
         ) : null}
-        <button className="giveCardsButton" onClick={givePlayerCards}>
-          {playerCards.length < 2 ? "Get cards" : "New card"}
-        </button>
+
+        {playerCards.length ? null : (
+          <button className="startGameButton" onClick={getCards}>
+            Start the game
+          </button>
+        )}
 
         {/*    Player cards container     */}
-        <div className="playerCardsContainer">
-          <p>My cards</p>
-          {/*     Cards      */}
-          {playerCards.length > 0 ? (
+        {playerCards.length ? (
+          <div className="playerCardsContainer">
+            <p className="myCardTitle">My cards</p>
+            <div className="buttonsAndValueContainer">
+              {playerDeckValue ? (
+                <p className="deckValue">
+                  Total value:{" "}
+                  <span className="deckValueSpan">{playerDeckValue}</span>
+                </p>
+              ) : null}
+              {!gameScore ? (
+                <div className="buttonsContainer">
+                  <button className="newCardButton" onClick={givePlayerNewCard}>
+                    New card
+                  </button>
+                  <button className="stopButton">Stop</button>
+                </div>
+              ) : (
+                <button className="newGameButton">New game</button>
+              )}
+            </div>
+            {/*     Cards      */}
             <div className="cardContainer">
               {playerCards.map((card, key) => {
                 return (
@@ -125,8 +146,8 @@ const GameScreen = () => {
                 );
               })}
             </div>
-          ) : null}
-        </div>
+          </div>
+        ) : null}
       </div>
     </div>
   );
