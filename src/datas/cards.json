@@ -1,0 +1,369 @@
+[
+  {
+    "name": "As de carreau",
+    "family": "carreau",
+    "value": 1,
+    "power": 12,
+    "img": "AD.png"
+  },
+  {
+    "name": "2 de carreau",
+    "family": "carreau",
+    "value": 2,
+    "power": 13,
+    "img": "2D.png"
+  },
+  {
+    "name": "3 de carreau",
+    "family": "carreau",
+    "value": 3,
+    "power": 3,
+    "img": "3D.png"
+  },
+  {
+    "name": "4 de carreau",
+    "family": "carreau",
+    "value": 4,
+    "power": 4,
+    "img": "4D.png"
+  },
+  {
+    "name": "5 de carreau",
+    "family": "carreau",
+    "value": 5,
+    "power": 5,
+    "img": "5D.png"
+  },
+  {
+    "name": "6 de carreau",
+    "family": "carreau",
+    "value": 6,
+    "power": 6,
+    "img": "6D.png"
+  },
+  {
+    "name": "7 de carreau",
+    "family": "carreau",
+    "value": 7,
+    "power": 7,
+    "img": "7D.png"
+  },
+  {
+    "name": "8 de carreau",
+    "family": "carreau",
+    "value": 8,
+    "power": 8,
+    "img": "8D.png"
+  },
+  {
+    "name": "9 de carreau",
+    "family": "carreau",
+    "value": 9,
+    "power": 9,
+    "img": "9D.png"
+  },
+  {
+    "name": "10 de carreau",
+    "family": "carreau",
+    "value": 10,
+    "power": 10,
+    "img": "10D.png"
+  },
+  {
+    "name": "Valet de carreau",
+    "family": "carreau",
+    "value": 11,
+    "power": 11,
+    "img": "JD.png"
+  },
+  {
+    "name": "Dame de carreau",
+    "family": "carreau",
+    "value": 12,
+    "power": 12,
+    "img": "QD.png"
+  },
+  {
+    "name": "Roi de carreau",
+    "family": "carreau",
+    "value": 13,
+    "power": 13,
+    "img": "KD.png"
+  },
+
+  {
+    "name": "As de coeur",
+    "family": "coeur",
+    "value": 1,
+    "power": 12,
+    "img": "AH.png"
+  },
+  {
+    "name": "2 de coeur",
+    "family": "coeur",
+    "value": 2,
+    "power": 13,
+    "img": "2H.png"
+  },
+  {
+    "name": "3 de coeur",
+    "family": "coeur",
+    "value": 3,
+    "power": 3,
+    "img": "3H.png"
+  },
+  {
+    "name": "4 de coeur",
+    "family": "coeur",
+    "value": 4,
+    "power": 4,
+    "img": "4H.png"
+  },
+  {
+    "name": "5 de coeur",
+    "family": "coeur",
+    "value": 5,
+    "power": 5,
+    "img": "5H.png"
+  },
+  {
+    "name": "6 de coeur",
+    "family": "coeur",
+    "value": 6,
+    "power": 6,
+    "img": "6H.png"
+  },
+  {
+    "name": "7 de coeur",
+    "family": "coeur",
+    "value": 7,
+    "power": 7,
+    "img": "7H.png"
+  },
+  {
+    "name": "8 de coeur",
+    "family": "coeur",
+    "value": 8,
+    "power": 8,
+    "img": "8H.png"
+  },
+  {
+    "name": "9 de coeur",
+    "family": "coeur",
+    "value": 9,
+    "power": 9,
+    "img": "9H.png"
+  },
+  {
+    "name": "10 de coeur",
+    "family": "coeur",
+    "value": 10,
+    "power": 10,
+    "img": "10H.png"
+  },
+  {
+    "name": "Valet de coeur",
+    "family": "coeur",
+    "value": 11,
+    "power": 11,
+    "img": "JH.png"
+  },
+  {
+    "name": "Dame de coeur",
+    "family": "coeur",
+    "value": 12,
+    "power": 12,
+    "img": "QH.png"
+  },
+  {
+    "name": "Roi de coeur",
+    "family": "coeur",
+    "value": 13,
+    "power": 13,
+    "img": "KH.png"
+  },
+
+  {
+    "name": "As de pique",
+    "family": "pique",
+    "value": 1,
+    "power": 12,
+    "img": "AS.png"
+  },
+  {
+    "name": "2 de pique",
+    "family": "pique",
+    "value": 2,
+    "power": 13,
+    "img": "2S.png"
+  },
+  {
+    "name": "3 de pique",
+    "family": "pique",
+    "value": 3,
+    "power": 3,
+    "img": "3S.png"
+  },
+  {
+    "name": "4 de pique",
+    "family": "pique",
+    "value": 4,
+    "power": 4,
+    "img": "4S.png"
+  },
+  {
+    "name": "5 de pique",
+    "family": "pique",
+    "value": 5,
+    "power": 5,
+    "img": "5S.png"
+  },
+  {
+    "name": "6 de pique",
+    "family": "pique",
+    "value": 6,
+    "power": 6,
+    "img": "6S.png"
+  },
+  {
+    "name": "7 de pique",
+    "family": "pique",
+    "value": 7,
+    "power": 7,
+    "img": "7S.png"
+  },
+  {
+    "name": "8 de pique",
+    "family": "pique",
+    "value": 8,
+    "power": 8,
+    "img": "8S.png"
+  },
+  {
+    "name": "9 de pique",
+    "family": "pique",
+    "value": 9,
+    "power": 9,
+    "img": "9S.png"
+  },
+  {
+    "name": "10 de pique",
+    "family": "pique",
+    "value": 10,
+    "power": 10,
+    "img": "10S.png"
+  },
+  {
+    "name": "Valet de pique",
+    "family": "pique",
+    "value": 11,
+    "power": 11,
+    "img": "JS.png"
+  },
+  {
+    "name": "Dame de pique",
+    "family": "pique",
+    "value": 12,
+    "power": 12,
+    "img": "QS.png"
+  },
+  {
+    "name": "Roi de pique",
+    "family": "pique",
+    "value": 13,
+    "power": 13,
+    "img": "KS.png"
+  },
+
+  {
+    "name": "As de trèfle",
+    "family": "trèfle",
+    "value": 1,
+    "power": 12,
+    "img": "AC.png"
+  },
+  {
+    "name": "2 de trèfle",
+    "family": "trèfle",
+    "value": 2,
+    "power": 13,
+    "img": "2C.png"
+  },
+  {
+    "name": "3 de trèfle",
+    "family": "trèfle",
+    "value": 3,
+    "power": 3,
+    "img": "3C.png"
+  },
+  {
+    "name": "4 de trèfle",
+    "family": "trèfle",
+    "value": 4,
+    "power": 4,
+    "img": "4C.png"
+  },
+  {
+    "name": "5 de trèfle",
+    "family": "trèfle",
+    "value": 5,
+    "power": 5,
+    "img": "5C.png"
+  },
+  {
+    "name": "6 de trèfle",
+    "family": "trèfle",
+    "value": 6,
+    "power": 6,
+    "img": "6C.png"
+  },
+  {
+    "name": "7 de trèfle",
+    "family": "trèfle",
+    "value": 7,
+    "power": 7,
+    "img": "7C.png"
+  },
+  {
+    "name": "8 de trèfle",
+    "family": "trèfle",
+    "value": 8,
+    "power": 8,
+    "img": "8C.png"
+  },
+  {
+    "name": "9 de trèfle",
+    "family": "trèfle",
+    "value": 9,
+    "power": 9,
+    "img": "9C.png"
+  },
+  {
+    "name": "10 de trèfle",
+    "family": "trèfle",
+    "value": 10,
+    "power": 10,
+    "img": "10C.png"
+  },
+  {
+    "name": "Valet de trèfle",
+    "family": "trèfle",
+    "value": 11,
+    "power": 11,
+    "img": "JC.png"
+  },
+  {
+    "name": "Dame de trèfle",
+    "family": "trèfle",
+    "value": 12,
+    "power": 12,
+    "img": "QC.png"
+  },
+  {
+    "name": "Roi de trèfle",
+    "family": "trèfle",
+    "value": 13,
+    "power": 13,
+    "img": "KC.png"
+  }
+]

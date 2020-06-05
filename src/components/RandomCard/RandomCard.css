@@ -1,0 +1,13 @@
+.randomCardImage {
+    height: 600px;
+}
+
+.deckContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.randomDeckCardImage {
+    height: 150px;
+}
