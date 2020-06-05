@@ -24,3 +24,16 @@
     margin: 0;
     font-family: Abril, serif;
 }
+
+.startGameHomePage {
+    background-color: #d63031;
+    padding: 10px 25px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-decoration: none;
+    font-size: 1.6rem;
+    color: #282c34;
+}
+.startGameHomePage:hover {
+    transform: scale(1.1);
+}

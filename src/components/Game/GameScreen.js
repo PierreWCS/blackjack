@@ -72,6 +72,7 @@ const GameScreen = () => {
       alert("BUSTED");
     } else if (countPower === 21) {
       alert("You reached 21 !");
+      setPlayerDeckValue(countPower);
     } else {
       setPlayerDeckValue(countPower);
     }
@@ -122,7 +123,9 @@ const GameScreen = () => {
                   <span className="deckValueSpan">{playerDeckValue}</span>
                 </p>
               ) : null}
-              {!gameScore ? (
+
+              {/*     Game actions     */}
+              {!gameScore && playerDeckValue < 21 ? (
                 <div className="buttonsContainer">
                   <button className="newCardButton" onClick={givePlayerNewCard}>
                     New card
@@ -133,6 +136,7 @@ const GameScreen = () => {
                 <button className="newGameButton">New game</button>
               )}
             </div>
+
             {/*     Cards      */}
             <div className="cardContainer">
               {playerCards.map((card, key) => {
