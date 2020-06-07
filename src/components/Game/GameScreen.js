@@ -5,8 +5,11 @@ import "./GameScreen.css";
 const GameScreen = () => {
   const [gameDeck, setGameDeck] = useState(null);
   const [bankCards, setBankCards] = useState([]);
+  const [bankDeckValue, setBankDeckValue] = useState(0);
   const [playerCards, setPlayerCards] = useState([]);
   const [playerDeckValue, setPlayerDeckValue] = useState(0);
+  const [playerIsDone, setPlayerIsDone] = useState(false);
+
   const [gameScore, setGameScore] = useState(null);
 
   useEffect(() => {
@@ -16,7 +19,7 @@ const GameScreen = () => {
     console.log("Random deck :", deck);
   }, []);
 
-  const getCards = function () {
+  const getCards = function() {
     let initPlayerDeck = [];
 
     // Pick card 1
@@ -51,6 +54,7 @@ const GameScreen = () => {
     bankInit.push(bankSecondPick.card);
 
     setBankCards(bankInit);
+    setBankDeckValue(bankFirstPick.card.power + bankSecondPick.card.power);
   };
 
   const givePlayerNewCard = function async() {
@@ -78,12 +82,59 @@ const GameScreen = () => {
     }
   };
 
-  const resetGame = function () {
+  const bankPlays = function() {
+    setPlayerIsDone(true);
+    let stockValue = bankDeckValue;
+    if (stockValue === 21) {
+      setGameScore("loose");
+      alert("Bank has 21. You loose");
+    }
+    // If the bank needs to pick a new card
+    else if (stockValue < 17) {
+      console.log("Bank is under 17");
+      console.log(stockValue);
+      let bankPick = CardsDeck.getCardFromDeck(gameDeck);
+      let deckValue = bankDeckValue + bankPick.card.power;
+      console.log(deckValue);
+      setGameDeck([...bankPick.deck]);
+      let stockCards = bankCards;
+      stockCards.push(bankPick.card);
+      setBankCards([...stockCards]);
+
+      // If the bank value is higher than 17 BREAK
+      if (deckValue >= 17 && deckValue <= 21) {
+        setBankDeckValue(deckValue);
+        if (deckValue > playerDeckValue) {
+          alert(`Bank has ${deckValue}, you loose`);
+          setGameScore('loose')
+        } else {
+          alert(`Bank has ${deckValue}, you win`);
+          setGameScore('win');
+        }
+      } else if (deckValue > 21) {
+        alert(`Bank has busted with ${deckValue}, you win`);
+        setGameScore('win')
+      }
+    }
+    // If the bank is lower than player
+    else if (stockValue < playerDeckValue) {
+      alert(`Bank has ${stockValue}, you win`);
+      setGameScore('win');
+    }
+    // If the bank is higher than player
+    else if (stockValue >= playerDeckValue) {
+      alert(`Bank has ${stockValue}! You loose`);
+      setGameScore("loose");
+    }
+  };
+
+  const resetGame = function() {
     setPlayerCards([]);
     setPlayerDeckValue(null);
     setBankCards([]);
     setGameDeck(CardsDeck.getDeck());
     setGameScore(null);
+    setPlayerIsDone(false);
   };
 
   return (
@@ -98,10 +149,10 @@ const GameScreen = () => {
                     key={key}
                     className="playerCardImage"
                     src={require(`../../datas/cards/cards-images/${card.img}`)}
-                    alt="player card"
+                    alt="bank card"
                   />
                 );
-              } else
+              } else if (playerIsDone === false) {
                 return (
                   <img
                     key={key}
@@ -110,6 +161,16 @@ const GameScreen = () => {
                     alt=""
                   />
                 );
+              } else {
+                return (
+                  <img
+                    key={key}
+                    className="playerCardImage"
+                    src={require(`../../datas/cards/cards-images/${card.img}`)}
+                    alt="bank card"
+                  />
+                );
+              }
             })}
           </div>
         ) : null}
@@ -133,12 +194,14 @@ const GameScreen = () => {
               ) : null}
 
               {/*     Game actions     */}
-              {!gameScore && playerDeckValue < 21 ? (
+              {!gameScore && playerDeckValue <= 21 ? (
                 <div className="buttonsContainer">
                   <button className="newCardButton" onClick={givePlayerNewCard}>
                     New card
                   </button>
-                  <button className="stopButton">Stop</button>
+                  <button className="stopButton" onClick={bankPlays}>
+                    Stop
+                  </button>
                 </div>
               ) : (
                 <button className="newGameButton" onClick={resetGame}>

@@ -10,7 +10,6 @@ const HomePage = () => {
         <Link className="startGameHomePage" to="/game">
           PLAY
         </Link>
-        <Link to="/random">Get a random card</Link>
       </div>
     </div>
   );
