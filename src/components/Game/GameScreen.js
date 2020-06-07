@@ -114,6 +114,9 @@ const GameScreen = () => {
       } else if (deckValue > 21) {
         alert(`Bank has busted with ${deckValue}, you win`);
         setGameScore('win')
+      } else if (deckValue < 17) {
+        // TODO bank pick again new card
+        console.log('bank pick again')
       }
     }
     // If the bank is lower than player
