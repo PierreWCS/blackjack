@@ -38,6 +38,7 @@ const GameScreen = () => {
     setPlayerCards(initPlayerDeck);
 
     // Set the value of the deck
+    console.log(initPlayerDeck);
     let deckValue = initPlayerDeck[0].power + initPlayerDeck[1].power;
     setPlayerDeckValue(deckValue);
 
@@ -111,7 +112,7 @@ const GameScreen = () => {
               return 0;
             } else {
               setGameScore("win");
-              setGameScore(`Bank has ${deckValue}, you win`);
+              alert(`Bank has ${deckValue}, you win`);
               return 0;
             }
           }
