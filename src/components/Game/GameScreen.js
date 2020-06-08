@@ -59,7 +59,6 @@ const GameScreen = () => {
   };
 
   const givePlayerNewCard = function () {
-    console.log("I want another card");
     let pickFromDeck = CardsDeck.getCardFromDeck(gameDeck);
 
     let stockPlayerCards = playerCards;
@@ -69,7 +68,6 @@ const GameScreen = () => {
 
     // Verifying the power of the deck
     let countPower = playerDeckValue + pickFromDeck.card.power;
-    console.log(countPower);
 
     if (countPower > 21) {
       setPlayerDeckValue(countPower);
@@ -83,7 +81,7 @@ const GameScreen = () => {
     }
   };
 
-  const bankPlays = function () {
+  const bankPlays = function (value) {
     setPlayerIsDone(true);
     setShowBankCard(true);
 
@@ -92,39 +90,62 @@ const GameScreen = () => {
       if (stockValue === 21) {
         setGameScore("loose");
         alert("Bank has 21. You loose");
+        return 0;
+      }
+
+      if (value && value > 0) {
+        let bankPick = CardsDeck.getCardFromDeck(gameDeck);
+        let deckValue = value + bankPick.card.power;
+        setGameDeck([...bankPick.deck]);
+        let stockCards = bankCards;
+        stockCards.push(bankPick.card);
+        setBankCards([...stockCards]);
+        setBankDeckValue(deckValue);
+        setTimeout(() => {
+          if (deckValue < 17) {
+            bankPlays(deckValue);
+          } else {
+            if (deckValue >= playerDeckValue) {
+              setGameScore("loose");
+              alert(`Bank has ${deckValue}, you loose`);
+              return 0;
+            } else {
+              setGameScore("win");
+              setGameScore(`Bank has ${deckValue}, you win`);
+              return 0;
+            }
+          }
+        }, 2000);
       }
 
       // If the bank needs to pick a new card
       else if (stockValue < 17) {
-        console.log("Bank is under 17");
-        console.log(stockValue);
         let bankPick = CardsDeck.getCardFromDeck(gameDeck);
         let deckValue = bankDeckValue + bankPick.card.power;
-        console.log(deckValue);
         setBankDeckValue(deckValue);
         setGameDeck([...bankPick.deck]);
         let stockCards = bankCards;
         stockCards.push(bankPick.card);
         setBankCards([...stockCards]);
 
-        // If the bank value is higher than 17 BREAK
-        if (deckValue >= 17 && deckValue <= 21) {
-          setBankDeckValue(deckValue);
-          if (deckValue > playerDeckValue) {
-            setGameScore("loose");
-            alert(`Bank has ${deckValue}, you loose`);
-          } else {
+        setTimeout(() => {
+          // If the bank value is higher than 17 BREAK
+          if (deckValue >= 17 && deckValue <= 21) {
+            setBankDeckValue(deckValue);
+            if (deckValue >= playerDeckValue) {
+              setGameScore("loose");
+              alert(`Bank has ${deckValue}, you loose`);
+            } else {
+              setGameScore("win");
+              alert(`Bank has ${deckValue}, you win`);
+            }
+          } else if (deckValue > 21) {
             setGameScore("win");
-            alert(`Bank has ${deckValue}, you win`);
+            alert(`Bank has busted with ${deckValue}, you win`);
+          } else if (deckValue < 17) {
+            bankPlays(deckValue);
           }
-        } else if (deckValue > 21) {
-          setGameScore("win");
-          alert(`Bank has busted with ${deckValue}, you win`);
-        } else if (deckValue < 17) {
-          bankPlays();
-          // TODO bank pick again new card
-          console.log("bank pick again");
-        }
+        }, 2000);
       }
       // If the bank is lower than player
       else if (stockValue < playerDeckValue) {
@@ -132,11 +153,11 @@ const GameScreen = () => {
         alert(`Bank has ${stockValue}, you win`);
       }
       // If the bank is higher than player
-      else if (stockValue >= playerDeckValue) {
+      else if (stockValue >= playerDeckValue && stockValue <= 21) {
         setGameScore("loose");
         alert(`Bank has ${stockValue}! You loose`);
       }
-    }, 3000);
+    }, 2000);
   };
 
   const resetGame = function () {
@@ -144,7 +165,8 @@ const GameScreen = () => {
     setPlayerCards([]);
     setPlayerDeckValue(null);
     setBankCards([]);
-    setGameDeck(CardsDeck.getDeck());
+    let stockNewDeck = CardsDeck.getDeck();
+    setGameDeck(stockNewDeck);
     setGameScore(null);
     setPlayerIsDone(false);
   };
@@ -224,7 +246,7 @@ const GameScreen = () => {
               ) : null}
 
               {/*     Game actions     */}
-              {!gameScore && playerDeckValue <= 21 ? (
+              {!gameScore && playerDeckValue <= 21 && !playerIsDone ? (
                 <div className="buttonsContainer">
                   <button className="newCardButton" onClick={givePlayerNewCard}>
                     New card
