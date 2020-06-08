@@ -106,7 +106,7 @@ const GameScreen = () => {
           if (deckValue < 17) {
             bankPlays(deckValue);
           } else {
-            if (deckValue >= playerDeckValue) {
+            if (deckValue >= playerDeckValue && deckValue <= 21) {
               setGameScore("loose");
               alert(`Bank has ${deckValue}, you loose`);
               return 0;
