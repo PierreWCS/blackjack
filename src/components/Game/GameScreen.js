@@ -334,11 +334,12 @@ const GameScreen = () => {
                     Stop
                   </button>
                 </div>
-              ) : (
+              ) : null}
+              {gameScore ? (
                 <button className="newGameButton" onClick={resetGame}>
                   New game
                 </button>
-              )}
+              ) : null}
             </div>
 
             {/*     Cards      */}
