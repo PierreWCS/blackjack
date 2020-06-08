@@ -38,9 +38,11 @@ const GameScreen = () => {
   };
 
   const setBet = function () {
-    let coinsAfterBet = playerCoins - playerBet;
-    localStorage.setItem("playerCoins", JSON.stringify(coinsAfterBet));
-    setPlayerCoins(coinsAfterBet);
+    if (playerBet <= playerCoins) {
+      let coinsAfterBet = playerCoins - playerBet;
+      localStorage.setItem("playerCoins", JSON.stringify(coinsAfterBet));
+      setPlayerCoins(coinsAfterBet);
+    } else alert("I see u cheaters");
   };
 
   const getRewards = function () {
