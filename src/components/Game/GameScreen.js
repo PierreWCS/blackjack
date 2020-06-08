@@ -9,6 +9,7 @@ const GameScreen = () => {
   const [playerCards, setPlayerCards] = useState([]);
   const [playerDeckValue, setPlayerDeckValue] = useState(0);
   const [playerIsDone, setPlayerIsDone] = useState(false);
+  const [showBankCard, setShowBankCard] = useState(false);
 
   const [gameScore, setGameScore] = useState(null);
 
@@ -19,7 +20,7 @@ const GameScreen = () => {
     console.log("Random deck :", deck);
   }, []);
 
-  const getCards = function() {
+  const getCards = function () {
     let initPlayerDeck = [];
 
     // Pick card 1
@@ -57,7 +58,7 @@ const GameScreen = () => {
     setBankDeckValue(bankFirstPick.card.power + bankSecondPick.card.power);
   };
 
-  const givePlayerNewCard = function async() {
+  const givePlayerNewCard = function () {
     console.log("I want another card");
     let pickFromDeck = CardsDeck.getCardFromDeck(gameDeck);
 
@@ -82,56 +83,64 @@ const GameScreen = () => {
     }
   };
 
-  const bankPlays = function() {
+  const bankPlays = function () {
     setPlayerIsDone(true);
-    let stockValue = bankDeckValue;
-    if (stockValue === 21) {
-      setGameScore("loose");
-      alert("Bank has 21. You loose");
-    }
-    // If the bank needs to pick a new card
-    else if (stockValue < 17) {
-      console.log("Bank is under 17");
-      console.log(stockValue);
-      let bankPick = CardsDeck.getCardFromDeck(gameDeck);
-      let deckValue = bankDeckValue + bankPick.card.power;
-      console.log(deckValue);
-      setGameDeck([...bankPick.deck]);
-      let stockCards = bankCards;
-      stockCards.push(bankPick.card);
-      setBankCards([...stockCards]);
+    setShowBankCard(true);
 
-      // If the bank value is higher than 17 BREAK
-      if (deckValue >= 17 && deckValue <= 21) {
-        setBankDeckValue(deckValue);
-        if (deckValue > playerDeckValue) {
-          alert(`Bank has ${deckValue}, you loose`);
-          setGameScore('loose')
-        } else {
-          alert(`Bank has ${deckValue}, you win`);
-          setGameScore('win');
-        }
-      } else if (deckValue > 21) {
-        alert(`Bank has busted with ${deckValue}, you win`);
-        setGameScore('win')
-      } else if (deckValue < 17) {
-        // TODO bank pick again new card
-        console.log('bank pick again')
+    setTimeout(() => {
+      let stockValue = bankDeckValue;
+      if (stockValue === 21) {
+        setGameScore("loose");
+        alert("Bank has 21. You loose");
       }
-    }
-    // If the bank is lower than player
-    else if (stockValue < playerDeckValue) {
-      alert(`Bank has ${stockValue}, you win`);
-      setGameScore('win');
-    }
-    // If the bank is higher than player
-    else if (stockValue >= playerDeckValue) {
-      alert(`Bank has ${stockValue}! You loose`);
-      setGameScore("loose");
-    }
+
+      // If the bank needs to pick a new card
+      else if (stockValue < 17) {
+        console.log("Bank is under 17");
+        console.log(stockValue);
+        let bankPick = CardsDeck.getCardFromDeck(gameDeck);
+        let deckValue = bankDeckValue + bankPick.card.power;
+        console.log(deckValue);
+        setBankDeckValue(deckValue);
+        setGameDeck([...bankPick.deck]);
+        let stockCards = bankCards;
+        stockCards.push(bankPick.card);
+        setBankCards([...stockCards]);
+
+        // If the bank value is higher than 17 BREAK
+        if (deckValue >= 17 && deckValue <= 21) {
+          setBankDeckValue(deckValue);
+          if (deckValue > playerDeckValue) {
+            setGameScore("loose");
+            alert(`Bank has ${deckValue}, you loose`);
+          } else {
+            setGameScore("win");
+            alert(`Bank has ${deckValue}, you win`);
+          }
+        } else if (deckValue > 21) {
+          setGameScore("win");
+          alert(`Bank has busted with ${deckValue}, you win`);
+        } else if (deckValue < 17) {
+          bankPlays();
+          // TODO bank pick again new card
+          console.log("bank pick again");
+        }
+      }
+      // If the bank is lower than player
+      else if (stockValue < playerDeckValue) {
+        setGameScore("win");
+        alert(`Bank has ${stockValue}, you win`);
+      }
+      // If the bank is higher than player
+      else if (stockValue >= playerDeckValue) {
+        setGameScore("loose");
+        alert(`Bank has ${stockValue}! You loose`);
+      }
+    }, 3000);
   };
 
-  const resetGame = function() {
+  const resetGame = function () {
+    setShowBankCard(false);
     setPlayerCards([]);
     setPlayerDeckValue(null);
     setBankCards([]);
@@ -150,25 +159,43 @@ const GameScreen = () => {
                 return (
                   <img
                     key={key}
-                    className="playerCardImage"
+                    className="bankCard"
                     src={require(`../../datas/cards/cards-images/${card.img}`)}
                     alt="bank card"
                   />
                 );
-              } else if (playerIsDone === false) {
+              } else if (key === 1) {
+                return (
+                  <div className="hiddenCard" key={key}>
+                    <img
+                      src={require("../../datas/cards/cards-images/backs-card/red_back.png")}
+                      className="bankCard face front"
+                      alt="bank hidden card"
+                    />
+                    <img
+                      src={require(`../../datas/cards/cards-images/${card.img}`)}
+                      className={`bankCard face back ${
+                        showBankCard ? "showHiddenCard" : null
+                      }`}
+                      alt="bank card"
+                    />
+                  </div>
+                );
+              } else if (key === 2) {
                 return (
                   <img
                     key={key}
-                    className="playerCardImage"
-                    src={require("../../datas/cards/cards-images/backs-card/red_back.png")}
-                    alt=""
+                    className="bankCard"
+                    style={{ marginLeft: "165px" }}
+                    src={require(`../../datas/cards/cards-images/${card.img}`)}
+                    alt="bank card"
                   />
                 );
               } else {
                 return (
                   <img
                     key={key}
-                    className="playerCardImage"
+                    className="bankCard"
                     src={require(`../../datas/cards/cards-images/${card.img}`)}
                     alt="bank card"
                   />

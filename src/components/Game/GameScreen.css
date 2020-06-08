@@ -51,6 +51,33 @@
     height: 30vh;
 }
 
+.hiddenCard {
+    transform-style: preserve-3d;
+}
+
+.bankCard {
+    height: 150px;
+    margin: 10px 25px;
+}
+
+.face {
+    position: absolute;
+    transform-style: preserve-3d;
+    transition: ease-in-out 1s;
+    transform: perspective(500px) rotateY(0deg);
+    backface-visibility: hidden;
+}
+
+.back {
+    transform: perspective(500px) rotateY(180deg);
+}
+
+.showHiddenCard {
+    transform: perspective(500px) rotateY(360deg);
+}
+
+
+
 /*          Player cards         */
 
 .playerCardsContainer {
@@ -99,10 +126,6 @@
     border-radius: 5px;
     font-size: 1.2rem;
     cursor: pointer;
-}
-
-.newGameButton {
-
 }
 
 .myCardTitle {
