@@ -2,26 +2,52 @@ import React, { useEffect, useState } from "react";
 import CardsDeck from "../../services/CardsDeck";
 import "./GameScreen.css";
 import PopUp from "../PopUp/PopUp";
+import TopBar from "../TopBar/TopBar";
 
 const GameScreen = () => {
+  const [playerCoins, setPlayerCoins] = useState(null);
+  const [playerBet, setPlayerBet] = useState(null);
+
   const [gameDeck, setGameDeck] = useState(null);
+
   const [bankCards, setBankCards] = useState([]);
   const [bankDeckValue, setBankDeckValue] = useState(0);
+
   const [playerCards, setPlayerCards] = useState([]);
   const [playerDeckValue, setPlayerDeckValue] = useState(0);
+
+  const [showBankCard, setShowBankCard] = useState(false);
+
   const [playerIsDone, setPlayerIsDone] = useState(false);
   const [defeatType, setDefeatType] = useState(null);
-  const [showBankCard, setShowBankCard] = useState(false);
   const [displayPopUp, setDisplayPopUp] = useState(false);
-
   const [gameScore, setGameScore] = useState(null);
+  const [rewards, setRewards] = useState(null);
 
   useEffect(() => {
     // Create deck
     let deck = CardsDeck.getDeck();
     setGameDeck(deck);
-    console.log("Random deck :", deck);
+    getPlayerCoins();
   }, []);
+
+  const getPlayerCoins = function () {
+    let stockCoins = JSON.parse(localStorage.getItem("playerCoins"));
+    setPlayerCoins(stockCoins);
+    localStorage.setItem("playerCoins", JSON.stringify(stockCoins));
+  };
+
+  const setBet = function () {
+    let coinsAfterBet = playerCoins - playerBet;
+    localStorage.setItem("playerCoins", JSON.stringify(coinsAfterBet));
+    setPlayerCoins(coinsAfterBet);
+  };
+
+  const getRewards = function () {
+    let playerCoinsWithReward = playerBet * 1.5 + playerCoins;
+    setPlayerCoins(playerCoinsWithReward);
+    localStorage.setItem("playerCoins", playerCoinsWithReward);
+  };
 
   const getCards = function () {
     let initPlayerDeck = [];
@@ -41,7 +67,6 @@ const GameScreen = () => {
     setPlayerCards(initPlayerDeck);
 
     // Set the value of the deck
-    console.log(initPlayerDeck);
     let deckValue = initPlayerDeck[0].power + initPlayerDeck[1].power;
     setPlayerDeckValue(deckValue);
 
@@ -119,7 +144,8 @@ const GameScreen = () => {
             } else {
               setGameScore("win");
               setDisplayPopUp(true);
-              // alert(`Bank has ${deckValue}, you win`);
+              setRewards(playerBet * 1.5);
+              getRewards();
               return 0;
             }
           }
@@ -145,10 +171,14 @@ const GameScreen = () => {
               setDisplayPopUp(true);
             } else {
               setGameScore("win");
+              setRewards(playerBet * 1.5);
+              getRewards();
               setDisplayPopUp(true);
             }
           } else if (deckValue > 21) {
             setGameScore("win");
+            setRewards(playerBet * 1.5);
+            getRewards();
             setDisplayPopUp(true);
           } else if (deckValue < 17) {
             bankPlays(deckValue);
@@ -158,6 +188,8 @@ const GameScreen = () => {
       // If the bank is lower than player
       else if (stockValue < playerDeckValue) {
         setGameScore("win");
+        setRewards(playerBet * 1.5);
+        getRewards();
         setDisplayPopUp(true);
       }
       // If the bank is higher than player
@@ -181,6 +213,7 @@ const GameScreen = () => {
 
   return (
     <div className="gameScreenContainer">
+      <TopBar playerCoins={playerCoins} />
       <div className="gameArea">
         {bankCards.length ? (
           <div className="bankCardsContainer">
@@ -236,9 +269,23 @@ const GameScreen = () => {
         ) : null}
 
         {!playerCards.length ? (
-          <button className="startGameButton" onClick={getCards}>
-            Start the game
-          </button>
+          <div className="gameStartArea">
+            <h2 className="selectBetTitle">Select your bet</h2>
+            <input
+              className="betSelector"
+              type="number"
+              onChange={(event) => setPlayerBet(event.target.value)}
+            />
+            <button
+              className="startGameButton"
+              onClick={() => {
+                setBet();
+                getCards();
+              }}
+            >
+              Start the game
+            </button>
+          </div>
         ) : null}
 
         {/*    Player cards container     */}
@@ -257,7 +304,7 @@ const GameScreen = () => {
               {!gameScore && playerDeckValue <= 21 && !playerIsDone ? (
                 <div className="buttonsContainer">
                   <button className="newCardButton" onClick={givePlayerNewCard}>
-                    New card
+                    Card
                   </button>
                   <button className="stopButton" onClick={bankPlays}>
                     Stop
@@ -291,6 +338,7 @@ const GameScreen = () => {
             bankScore={bankDeckValue}
             defeatType={defeatType}
             setDisplayPopUp={setDisplayPopUp}
+            reward={rewards}
           />
         ) : null}
       </div>

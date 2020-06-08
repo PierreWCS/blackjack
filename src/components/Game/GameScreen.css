@@ -24,9 +24,27 @@
     box-shadow: #282c34 2px 2px 2px;
 }
 
+.gameStartArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    background-color: rgba(0,0,0, 0.7);
+    height: 45%;
+    width: 35%;
+}
+
+.selectBetTitle {
+    color: whitesmoke;
+}
+
+.betSelector {
+    height: 35px;
+}
+
 .startGameButton {
-    background-color: #282c34;
-    color: gold;
+    background-color: #d63031;
+    color: #282c34;
     border: none;
     border-radius: 5px;
     padding: 15px;

@@ -1,6 +1,10 @@
 import React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTrophy, faTimesCircle } from "@fortawesome/free-solid-svg-icons";
+import {
+  faTrophy,
+  faTimesCircle,
+  faGift,
+} from "@fortawesome/free-solid-svg-icons";
 import "./PopUp.css";
 
 const PopUp = ({ type, bankScore, reward, setDisplayPopUp, defeatType }) => {
@@ -47,6 +51,21 @@ const PopUp = ({ type, bankScore, reward, setDisplayPopUp, defeatType }) => {
         />
         <p className="popUpTypeMessage">Defeat !</p>
         <p>Bank has {bankScore}</p>
+        <button
+          className="closePopUpButton"
+          onClick={() => setDisplayPopUp(false)}
+        >
+          Close
+        </button>
+      </div>
+    );
+  } else if (type === "gift") {
+    return (
+      <div className="popUpContainer">
+        <FontAwesomeIcon icon={faGift} className="fa-6x" color="gold" />
+        <p className="popUpTypeMessage">Welcome !</p>
+        <p>As a welcome gift, we gave you 100 coins</p>
+        <p>Have fun with this blackjack game !</p>
         <button
           className="closePopUpButton"
           onClick={() => setDisplayPopUp(false)}

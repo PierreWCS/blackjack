@@ -1,0 +1,39 @@
+.topBarContainer {
+    position: fixed;
+    top: 0;
+    height: 5vh;
+    width: 100%;
+    background-color: #282c34;
+    color: white;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.linkToHome {
+    color: #2d3436;
+    padding: 5px 10px;
+    box-sizing: border-box;
+    text-decoration: none;
+    background-color: whitesmoke;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    width: 100px;
+}
+.linkToHome:hover {
+    transform: scale(1.1);
+}
+
+.coinsContainer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 150px;
+}
+
+.playerCoins {
+    color: gold;
+    font-size: 18px;
+}
