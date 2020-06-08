@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import CardsDeck from "../../services/CardsDeck";
 import "./GameScreen.css";
+import PopUp from "../PopUp/PopUp";
 
 const GameScreen = () => {
   const [gameDeck, setGameDeck] = useState(null);
@@ -9,7 +10,9 @@ const GameScreen = () => {
   const [playerCards, setPlayerCards] = useState([]);
   const [playerDeckValue, setPlayerDeckValue] = useState(0);
   const [playerIsDone, setPlayerIsDone] = useState(false);
+  const [defeatType, setDefeatType] = useState(null);
   const [showBankCard, setShowBankCard] = useState(false);
+  const [displayPopUp, setDisplayPopUp] = useState(false);
 
   const [gameScore, setGameScore] = useState(null);
 
@@ -69,17 +72,20 @@ const GameScreen = () => {
 
     // Verifying the power of the deck
     let countPower = playerDeckValue + pickFromDeck.card.power;
+    setPlayerDeckValue(countPower);
 
-    if (countPower > 21) {
-      setPlayerDeckValue(countPower);
-      setGameScore("loose");
-      alert("BUSTED");
-    } else if (countPower === 21) {
-      alert("You reached 21 !");
-      setPlayerDeckValue(countPower);
-    } else {
-      setPlayerDeckValue(countPower);
-    }
+    setTimeout(() => {
+      if (countPower > 21) {
+        setPlayerDeckValue(countPower);
+        setGameScore("loose");
+        setDefeatType("busted");
+        setDisplayPopUp(true);
+      } else if (countPower === 21) {
+        setPlayerDeckValue(countPower);
+      } else {
+        setPlayerDeckValue(countPower);
+      }
+    }, 2000);
   };
 
   const bankPlays = function (value) {
@@ -90,7 +96,7 @@ const GameScreen = () => {
       let stockValue = bankDeckValue;
       if (stockValue === 21) {
         setGameScore("loose");
-        alert("Bank has 21. You loose");
+        setDisplayPopUp(true);
         return 0;
       }
 
@@ -108,11 +114,12 @@ const GameScreen = () => {
           } else {
             if (deckValue >= playerDeckValue && deckValue <= 21) {
               setGameScore("loose");
-              alert(`Bank has ${deckValue}, you loose`);
+              setDisplayPopUp(true);
               return 0;
             } else {
               setGameScore("win");
-              alert(`Bank has ${deckValue}, you win`);
+              setDisplayPopUp(true);
+              // alert(`Bank has ${deckValue}, you win`);
               return 0;
             }
           }
@@ -135,14 +142,14 @@ const GameScreen = () => {
             setBankDeckValue(deckValue);
             if (deckValue >= playerDeckValue) {
               setGameScore("loose");
-              alert(`Bank has ${deckValue}, you loose`);
+              setDisplayPopUp(true);
             } else {
               setGameScore("win");
-              alert(`Bank has ${deckValue}, you win`);
+              setDisplayPopUp(true);
             }
           } else if (deckValue > 21) {
             setGameScore("win");
-            alert(`Bank has busted with ${deckValue}, you win`);
+            setDisplayPopUp(true);
           } else if (deckValue < 17) {
             bankPlays(deckValue);
           }
@@ -151,12 +158,12 @@ const GameScreen = () => {
       // If the bank is lower than player
       else if (stockValue < playerDeckValue) {
         setGameScore("win");
-        alert(`Bank has ${stockValue}, you win`);
+        setDisplayPopUp(true);
       }
       // If the bank is higher than player
       else if (stockValue >= playerDeckValue && stockValue <= 21) {
         setGameScore("loose");
-        alert(`Bank has ${stockValue}! You loose`);
+        setDisplayPopUp(true);
       }
     }, 2000);
   };
@@ -228,11 +235,11 @@ const GameScreen = () => {
           </div>
         ) : null}
 
-        {playerCards.length ? null : (
+        {!playerCards.length ? (
           <button className="startGameButton" onClick={getCards}>
             Start the game
           </button>
-        )}
+        ) : null}
 
         {/*    Player cards container     */}
         {playerCards.length ? (
@@ -277,6 +284,14 @@ const GameScreen = () => {
               })}
             </div>
           </div>
+        ) : null}
+        {displayPopUp ? (
+          <PopUp
+            type={gameScore}
+            bankScore={bankDeckValue}
+            defeatType={defeatType}
+            setDisplayPopUp={setDisplayPopUp}
+          />
         ) : null}
       </div>
     </div>

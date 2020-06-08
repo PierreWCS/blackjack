@@ -3,6 +3,7 @@ import "./App.css";
 import HomePage from "./components/HomePage/HomePage";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import GameScreen from "./components/Game/GameScreen";
+import PopUp from "./components/PopUp/PopUp";
 
 function App() {
   return (
