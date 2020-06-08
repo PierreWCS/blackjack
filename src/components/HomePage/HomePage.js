@@ -3,6 +3,8 @@ import "./HomePage.css";
 import { Link } from "react-router-dom";
 import TopBar from "../TopBar/TopBar";
 import PopUp from "../PopUp/PopUp";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowAltCircleRight } from "@fortawesome/free-solid-svg-icons";
 
 const HomePage = () => {
   const [playerCoins, setPlayerCoins] = useState(null);
@@ -30,6 +32,11 @@ const HomePage = () => {
         <h1 className="titleHomePage">Play Blackjack against the Bank !</h1>
         <Link className="startGameHomePage" to="/game">
           PLAY
+          <FontAwesomeIcon
+            icon={faArrowAltCircleRight}
+            color="white"
+            className="arrowIcon"
+          />
         </Link>
       </div>
       {displayPopup ? (

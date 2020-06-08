@@ -8,6 +8,15 @@
     align-items: center;
 }
 
+@keyframes fade-in {
+    from {
+        top: -100%;
+    }
+    to {
+        top: 0;
+    }
+}
+
 .gameArea {
     background-image: url('../../images/pokertable.jpg');
     background-repeat: no-repeat;
@@ -32,6 +41,7 @@
     background-color: rgba(0,0,0, 0.7);
     height: 45%;
     width: 35%;
+    border-radius: 5px;
 }
 
 .selectBetTitle {
@@ -40,11 +50,12 @@
 
 .betSelector {
     height: 35px;
+    width: 70%;
 }
 
 .startGameButton {
     background-color: #d63031;
-    color: #282c34;
+    color: whitesmoke;
     border: none;
     border-radius: 5px;
     padding: 15px;
@@ -54,6 +65,13 @@
 }
 .startGameButton:hover {
     transform: scale(1.1);
+}
+
+.iconAndInputBet {
+    display: flex;
+    align-items: center;
+    width: 60%;
+    justify-content: space-around;
 }
 
 .cardContainer {
@@ -95,8 +113,6 @@
     transform: perspective(500px) rotateY(360deg);
 }
 
-
-
 /*          Player cards         */
 
 .playerCardsContainer {
@@ -123,6 +139,7 @@
     margin: 10px 25px;
     box-shadow: 2px 2px 2px #282c34;
     border-radius: 10px;
+    animation: fade-in 1s;
 }
 
 .myCardTitle {

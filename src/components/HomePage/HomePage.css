@@ -4,6 +4,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
     background-image: url("../../images/blackjackBackground-min.jpg");
     background-size: cover;
 }
@@ -14,26 +15,33 @@
     flex-direction: column;
     align-items: center;
     background-color: rgba(0, 0, 0, 0.8);
-    border-radius: 15px;
-    width: 70%;
-    height: 70%;
-    color: gold;
+    width: 100%;
+    height: 40%;
 }
 
 .titleHomePage {
     margin: 0;
+    color: whitesmoke;
     font-family: Abril, serif;
+}
+
+.arrowIcon {
+    display: none;
 }
 
 .startGameHomePage {
     background-color: #d63031;
-    padding: 10px 25px;
+    padding: 10px 35px;
     cursor: pointer;
+    width: 125px;
     border-radius: 5px;
     text-decoration: none;
     font-size: 1.6rem;
-    color: #282c34;
+    color: whitesmoke;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
-.startGameHomePage:hover {
-    transform: scale(1.1);
+.startGameHomePage:hover .arrowIcon {
+    display: initial;
 }

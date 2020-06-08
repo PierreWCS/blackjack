@@ -3,6 +3,8 @@ import CardsDeck from "../../services/CardsDeck";
 import "./GameScreen.css";
 import PopUp from "../PopUp/PopUp";
 import TopBar from "../TopBar/TopBar";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCoins } from "@fortawesome/free-solid-svg-icons";
 
 const GameScreen = () => {
   const [playerCoins, setPlayerCoins] = useState(null);
@@ -42,13 +44,26 @@ const GameScreen = () => {
       let coinsAfterBet = playerCoins - playerBet;
       localStorage.setItem("playerCoins", JSON.stringify(coinsAfterBet));
       setPlayerCoins(coinsAfterBet);
-    } else alert("I see u cheaters");
+      getCards();
+    } else if (playerCoins < 0.5) {
+      alert("You have no more coins? Visit the homepage for a small gift :)");
+    } else {
+      alert("Ohoh, there is something wrong here");
+    }
   };
 
   const getRewards = function () {
-    let playerCoinsWithReward = playerBet * 1.5 + playerCoins;
-    setPlayerCoins(playerCoinsWithReward);
-    localStorage.setItem("playerCoins", playerCoinsWithReward);
+    if (playerCards.length === 2 && playerDeckValue === 21) {
+      setRewards(playerBet * 2);
+      let blackjackReward = playerBet * 2 + playerCoins;
+      setPlayerCoins(blackjackReward);
+      localStorage.setItem("playerCoins", blackjackReward);
+    } else {
+      setRewards(playerBet * 1.5);
+      let playerCoinsWithReward = playerBet * 1.5 + playerCoins;
+      setPlayerCoins(playerCoinsWithReward);
+      localStorage.setItem("playerCoins", playerCoinsWithReward);
+    }
   };
 
   const getCards = function () {
@@ -146,7 +161,6 @@ const GameScreen = () => {
             } else {
               setGameScore("win");
               setDisplayPopUp(true);
-              setRewards(playerBet * 1.5);
               getRewards();
               return 0;
             }
@@ -173,13 +187,11 @@ const GameScreen = () => {
               setDisplayPopUp(true);
             } else {
               setGameScore("win");
-              setRewards(playerBet * 1.5);
               getRewards();
               setDisplayPopUp(true);
             }
           } else if (deckValue > 21) {
             setGameScore("win");
-            setRewards(playerBet * 1.5);
             getRewards();
             setDisplayPopUp(true);
           } else if (deckValue < 17) {
@@ -190,7 +202,6 @@ const GameScreen = () => {
       // If the bank is lower than player
       else if (stockValue < playerDeckValue) {
         setGameScore("win");
-        setRewards(playerBet * 1.5);
         getRewards();
         setDisplayPopUp(true);
       }
@@ -211,6 +222,8 @@ const GameScreen = () => {
     setGameDeck(stockNewDeck);
     setGameScore(null);
     setPlayerIsDone(false);
+    setPlayerBet(null);
+    setRewards(null);
   };
 
   return (
@@ -273,16 +286,25 @@ const GameScreen = () => {
         {!playerCards.length ? (
           <div className="gameStartArea">
             <h2 className="selectBetTitle">Select your bet</h2>
-            <input
-              className="betSelector"
-              type="number"
-              onChange={(event) => setPlayerBet(event.target.value)}
-            />
+            <div className="iconAndInputBet">
+              <FontAwesomeIcon icon={faCoins} color="gold" className="fa-2x" />
+              <input
+                placeholder="min 0.5"
+                required
+                className="betSelector"
+                type="number"
+                onChange={(event) => setPlayerBet(event.target.value)}
+              />
+            </div>
+
             <button
               className="startGameButton"
               onClick={() => {
-                setBet();
-                getCards();
+                if (playerBet && playerBet >= 0.5) {
+                  setBet();
+                } else {
+                  alert("You must select a bet to play");
+                }
               }}
             >
               Start the game
