@@ -3,11 +3,15 @@ import randomNumber from "./RandomNumber";
 
 export default {
   getDeck() {
-    return Cards.sort(() => Math.random() - 0.5);
+    let stockCards = Cards;
+    return stockCards.sort(() => Math.random() - 0.5);
   },
 
-  squeezeDeck(deck) {
-    return deck.sort(() => Math.random() - 0.5);
+  shuffleDeck(arr) {
+    return arr
+      .map((a) => [Math.random(), a])
+      .sort((a, b) => a[0] - b[0])
+      .map((a) => a[1]);
   },
 
   getCardFromDeck(deck) {

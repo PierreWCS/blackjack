@@ -30,6 +30,7 @@ const GameScreen = () => {
     // Create deck
     let deck = CardsDeck.getDeck();
     setGameDeck(deck);
+
     getPlayerCoins();
   }, []);
 
@@ -223,12 +224,19 @@ const GameScreen = () => {
 
   const resetGame = function () {
     // Reset all the states and game deck for a new game
+    let stockPlayedCards = gameDeck;
+    playerCards.map((card) => {
+      stockPlayedCards.push(card);
+    });
+    bankCards.map((card) => {
+      stockPlayedCards.push(card);
+    });
+    let shuffleDeck = CardsDeck.shuffleDeck(stockPlayedCards);
+    setGameDeck(shuffleDeck);
     setShowBankCard(false);
     setPlayerCards([]);
     setPlayerDeckValue(null);
     setBankCards([]);
-    let stockNewDeck = CardsDeck.getDeck();
-    setGameDeck(stockNewDeck);
     setGameScore(null);
     setPlayerIsDone(false);
     setPlayerBet(null);
@@ -302,7 +310,16 @@ const GameScreen = () => {
 
         {!playerCards.length ? (
           // Bet selection before the game starts
-          <form className="gameStartArea">
+          <form
+            className="gameStartArea"
+            onSubmit={() => {
+              if (playerBet && playerBet >= 0.5) {
+                setBet();
+              } else {
+                alert("You must select a bet to play");
+              }
+            }}
+          >
             <h2 className="selectBetTitle">Select your bet</h2>
             <div className="iconAndInputBet">
               <FontAwesomeIcon icon={faCoins} color="gold" className="fa-2x" />
@@ -314,18 +331,7 @@ const GameScreen = () => {
                 onChange={(event) => setPlayerBet(event.target.value)}
               />
             </div>
-            <button
-              className="startGameButton"
-              onClick={() => {
-                if (playerBet && playerBet >= 0.5) {
-                  setBet();
-                } else {
-                  alert("You must select a bet to play");
-                }
-              }}
-            >
-              Start the game
-            </button>
+            <button className="startGameButton">Start the game</button>
           </form>
         ) : null}
 
