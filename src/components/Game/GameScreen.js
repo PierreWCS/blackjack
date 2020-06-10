@@ -34,6 +34,7 @@ const GameScreen = () => {
   }, []);
 
   const getPlayerCoins = function () {
+    // Get players coins from the local storage and set the state with it
     let stockCoins = JSON.parse(localStorage.getItem("playerCoins"));
     setPlayerCoins(stockCoins);
     localStorage.setItem("playerCoins", JSON.stringify(stockCoins));
@@ -53,12 +54,14 @@ const GameScreen = () => {
   };
 
   const getRewards = function () {
+    // If players reaches 21 initially gives him x2 bonus
     if (playerCards.length === 2 && playerDeckValue === 21) {
       setRewards(playerBet * 2);
       let blackjackReward = playerBet * 2 + playerCoins;
       setPlayerCoins(blackjackReward);
       localStorage.setItem("playerCoins", blackjackReward);
     } else {
+      // else give the player's bet * 1,5
       setRewards(playerBet * 1.5);
       let playerCoinsWithReward = playerBet * 1.5 + playerCoins;
       setPlayerCoins(playerCoinsWithReward);
@@ -100,6 +103,7 @@ const GameScreen = () => {
     setGameDeck(bankSecondPick.deck);
     bankInit.push(bankSecondPick.card);
 
+    // Set value of the bank deck
     setBankCards(bankInit);
     setBankDeckValue(bankFirstPick.card.power + bankSecondPick.card.power);
   };
@@ -136,12 +140,14 @@ const GameScreen = () => {
 
     setTimeout(() => {
       let stockValue = bankDeckValue;
+      // If bank has 21 initially, bank wins
       if (stockValue === 21) {
         setGameScore("loose");
         setDisplayPopUp(true);
         return 0;
       }
 
+      // recursive function when the bank has to pick another card until she is lower than 17
       if (value && value > 0) {
         let bankPick = CardsDeck.getCardFromDeck(gameDeck);
         let deckValue = value + bankPick.card.power;
@@ -168,7 +174,7 @@ const GameScreen = () => {
         }, 2000);
       }
 
-      // If the bank needs to pick a new card
+      // If the bank is lower than 17 she needs to pick a new card
       else if (stockValue < 17) {
         let bankPick = CardsDeck.getCardFromDeck(gameDeck);
         let deckValue = bankDeckValue + bankPick.card.power;
@@ -214,6 +220,7 @@ const GameScreen = () => {
   };
 
   const resetGame = function () {
+    // Reset all the states and game deck for a new game
     setShowBankCard(false);
     setPlayerCards([]);
     setPlayerDeckValue(null);
@@ -230,9 +237,11 @@ const GameScreen = () => {
     <div className="gameScreenContainer">
       <TopBar playerCoins={playerCoins} />
       <div className="gameArea">
+        {/*     Bank cards      */}
         {bankCards.length ? (
           <div className="bankCardsContainer">
             {bankCards.map((card, key) => {
+              // First card is shown
               if (key === 0) {
                 return (
                   <img
@@ -242,7 +251,10 @@ const GameScreen = () => {
                     alt="bank card"
                   />
                 );
-              } else if (key === 1) {
+              }
+
+              // Second card is hidden since the player is playing
+              else if (key === 1) {
                 return (
                   <div className="hiddenCard" key={key}>
                     <img
@@ -259,7 +271,10 @@ const GameScreen = () => {
                     />
                   </div>
                 );
-              } else if (key === 2) {
+              }
+
+              // Theses cards appears when the player is done and the bank needs to pick new cards to reach 17
+              else if (key === 2) {
                 return (
                   <img
                     key={key}
@@ -284,6 +299,7 @@ const GameScreen = () => {
         ) : null}
 
         {!playerCards.length ? (
+          // Bet selection before the game starts
           <div className="gameStartArea">
             <h2 className="selectBetTitle">Select your bet</h2>
             <div className="iconAndInputBet">
