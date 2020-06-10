@@ -41,6 +41,24 @@ const PopUp = ({ type, bankScore, reward, setDisplayPopUp, defeatType }) => {
         </button>
       </div>
     );
+  } else if (defeatType === "bankHigher") {
+    return (
+      <div className="popUpContainer">
+        <FontAwesomeIcon
+          icon={faTimesCircle}
+          className="fa-6x"
+          color="indianred"
+        />
+        <p className="popUpTypeMessage">Loose !</p>
+        <p>Bank is higher with {bankScore}</p>
+        <button
+          className="closePopUpButton"
+          onClick={() => setDisplayPopUp(false)}
+        >
+          Close
+        </button>
+      </div>
+    );
   } else if (type === "loose") {
     return (
       <div className="popUpContainer">
@@ -70,7 +88,7 @@ const PopUp = ({ type, bankScore, reward, setDisplayPopUp, defeatType }) => {
           className="closePopUpButton"
           onClick={() => setDisplayPopUp(false)}
         >
-          Close
+          Thanks !
         </button>
       </div>
     );

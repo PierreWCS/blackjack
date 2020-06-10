@@ -214,6 +214,7 @@ const GameScreen = () => {
       // If the bank is higher than player
       else if (stockValue >= playerDeckValue && stockValue <= 21) {
         setGameScore("loose");
+        setDefeatType("bankHigher");
         setDisplayPopUp(true);
       }
     }, 2000);
