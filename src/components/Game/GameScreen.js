@@ -302,7 +302,7 @@ const GameScreen = () => {
 
         {!playerCards.length ? (
           // Bet selection before the game starts
-          <div className="gameStartArea">
+          <form className="gameStartArea">
             <h2 className="selectBetTitle">Select your bet</h2>
             <div className="iconAndInputBet">
               <FontAwesomeIcon icon={faCoins} color="gold" className="fa-2x" />
@@ -314,7 +314,6 @@ const GameScreen = () => {
                 onChange={(event) => setPlayerBet(event.target.value)}
               />
             </div>
-
             <button
               className="startGameButton"
               onClick={() => {
@@ -327,7 +326,7 @@ const GameScreen = () => {
             >
               Start the game
             </button>
-          </div>
+          </form>
         ) : null}
 
         {/*    Player cards container     */}
