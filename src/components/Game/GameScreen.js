@@ -162,6 +162,7 @@ const GameScreen = () => {
           } else {
             if (deckValue >= playerDeckValue && deckValue <= 21) {
               setGameScore("loose");
+              setDefeatType("bankHigher");
               setDisplayPopUp(true);
               return 0;
             } else {
