@@ -82,7 +82,7 @@ const PopUp = ({ type, bankScore, reward, setDisplayPopUp, defeatType }) => {
       <div className="popUpContainer">
         <FontAwesomeIcon icon={faGift} className="fa-6x" color="gold" />
         <p className="popUpTypeMessage">Welcome !</p>
-        <p>As a welcome gift, we gave you 100 coins</p>
+        <p>As a welcome gift, we gave you 1000 coins</p>
         <p>Have fun with this blackjack game !</p>
         <button
           className="closePopUpButton"

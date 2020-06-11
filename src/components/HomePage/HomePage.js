@@ -15,9 +15,9 @@ const HomePage = () => {
 
   const getPlayerCoins = function () {
     let stockPlayerCoins = JSON.parse(localStorage.getItem("playerCoins"));
-    if (!stockPlayerCoins) {
+    if (!stockPlayerCoins || stockPlayerCoins < 50) {
       setDisplayPopUp(true);
-      let playerCoinsInit = 100;
+      let playerCoinsInit = 1000;
       localStorage.setItem("playerCoins", JSON.stringify(playerCoinsInit));
       setPlayerCoins(playerCoinsInit);
     } else {

@@ -47,7 +47,7 @@ const GameScreen = () => {
       localStorage.setItem("playerCoins", JSON.stringify(coinsAfterBet));
       setPlayerCoins(coinsAfterBet);
       getCards();
-    } else if (playerCoins < 0.5) {
+    } else if (playerCoins < 50) {
       alert("You have no more coins? Visit the homepage for a small gift :)");
     } else {
       alert("Ohoh, there is something wrong here");
@@ -313,7 +313,7 @@ const GameScreen = () => {
           <form
             className="gameStartArea"
             onSubmit={() => {
-              if (playerBet && playerBet >= 0.5) {
+              if (playerBet && playerBet >= 50) {
                 setBet();
               } else {
                 alert("You must select a bet to play");
@@ -324,7 +324,7 @@ const GameScreen = () => {
             <div className="iconAndInputBet">
               <FontAwesomeIcon icon={faCoins} color="gold" className="fa-2x" />
               <input
-                placeholder="min 0.5"
+                placeholder="min 50"
                 required
                 className="betSelector"
                 type="number"
