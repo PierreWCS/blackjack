@@ -203,3 +203,32 @@ button {
 button:focus {
     outline: none;
 }
+
+@media (max-width: 1060px) {
+    .gameStartArea {
+        width: 80%;
+    }
+    .playerCardsContainer {
+        width: 70%;
+        border: none;
+    }
+    .cardContainer {
+        width: 110%;
+        justify-content: center;
+        flex-wrap: wrap;
+    }
+    .buttonsAndValueContainer {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+    }
+    .playerCardImage {
+        height: 100px;
+    }
+    .bankCardsContainer {
+        flex-wrap: wrap;
+    }
+    .bankCard {
+        height: 100px;
+    }
+}

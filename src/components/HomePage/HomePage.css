@@ -45,3 +45,9 @@
 .startGameHomePage:hover .arrowIcon {
     display: initial;
 }
+
+@media (max-width: 1060px) {
+    .homePageContainer {
+        background-position: center;
+    }
+}
