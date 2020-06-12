@@ -1,7 +1,7 @@
 Demo available here:
 https://my-blackjack.netlify.app/
 
-To install the project please follow this instructions:
+To install the project please follow these instructions:
 
 - clone the repo
 - cd into the folder
