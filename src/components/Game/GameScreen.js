@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from "react";
-import CardsDeck from "../../services/CardsDeck";
-import "./GameScreen.css";
-import PopUp from "../PopUp/PopUp";
-import TopBar from "../TopBar/TopBar";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCoins } from "@fortawesome/free-solid-svg-icons";
+import React, { useEffect, useState } from 'react';
+import CardsDeck from '../../services/CardsDeck';
+import './GameScreen.css';
+import PopUp from '../PopUp/PopUp';
+import TopBar from '../TopBar/TopBar';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCoins } from '@fortawesome/free-solid-svg-icons';
 
 const GameScreen = () => {
   const [playerCoins, setPlayerCoins] = useState(null);
@@ -36,21 +36,21 @@ const GameScreen = () => {
 
   const getPlayerCoins = function () {
     // Get players coins from the local storage and set the state with it
-    let stockCoins = JSON.parse(localStorage.getItem("playerCoins"));
+    let stockCoins = JSON.parse(localStorage.getItem('playerCoins'));
     setPlayerCoins(stockCoins);
-    localStorage.setItem("playerCoins", JSON.stringify(stockCoins));
+    localStorage.setItem('playerCoins', JSON.stringify(stockCoins));
   };
 
   const setBet = function () {
     if (playerBet <= playerCoins) {
       let coinsAfterBet = playerCoins - playerBet;
-      localStorage.setItem("playerCoins", JSON.stringify(coinsAfterBet));
+      localStorage.setItem('playerCoins', JSON.stringify(coinsAfterBet));
       setPlayerCoins(coinsAfterBet);
       getCards();
     } else if (playerCoins < 50) {
-      alert("You have no more coins? Visit the homepage for a small gift :)");
+      alert('You have no more coins? Visit the homepage for a small gift :)');
     } else {
-      alert("Ohoh, there is something wrong here");
+      alert('Ohoh, there is something wrong here');
     }
   };
 
@@ -60,13 +60,13 @@ const GameScreen = () => {
       setRewards(playerBet * 2);
       let blackjackReward = playerBet * 2 + playerCoins;
       setPlayerCoins(blackjackReward);
-      localStorage.setItem("playerCoins", blackjackReward);
+      localStorage.setItem('playerCoins', blackjackReward);
     } else {
       // else give the player's bet * 1,5
       setRewards(playerBet * 1.5);
       let playerCoinsWithReward = playerBet * 1.5 + playerCoins;
       setPlayerCoins(playerCoinsWithReward);
-      localStorage.setItem("playerCoins", playerCoinsWithReward);
+      localStorage.setItem('playerCoins', playerCoinsWithReward);
     }
   };
 
@@ -124,8 +124,8 @@ const GameScreen = () => {
     setTimeout(() => {
       if (countPower > 21) {
         setPlayerDeckValue(countPower);
-        setGameScore("loose");
-        setDefeatType("busted");
+        setGameScore('loose');
+        setDefeatType('busted');
         setDisplayPopUp(true);
       } else if (countPower === 21) {
         setPlayerDeckValue(countPower);
@@ -143,7 +143,7 @@ const GameScreen = () => {
       let stockValue = bankDeckValue;
       // If bank has 21 initially, bank wins
       if (stockValue === 21) {
-        setGameScore("loose");
+        setGameScore('loose');
         setDisplayPopUp(true);
         return 0;
       }
@@ -162,12 +162,12 @@ const GameScreen = () => {
             bankPlays(deckValue);
           } else {
             if (deckValue >= playerDeckValue && deckValue <= 21) {
-              setGameScore("loose");
-              setDefeatType("bankHigher");
+              setGameScore('loose');
+              setDefeatType('bankHigher');
               setDisplayPopUp(true);
               return 0;
             } else {
-              setGameScore("win");
+              setGameScore('win');
               setDisplayPopUp(true);
               getRewards();
               return 0;
@@ -191,15 +191,16 @@ const GameScreen = () => {
           if (deckValue >= 17 && deckValue <= 21) {
             setBankDeckValue(deckValue);
             if (deckValue >= playerDeckValue) {
-              setGameScore("loose");
+              setGameScore('loose');
+              setDefeatType('bankHigher');
               setDisplayPopUp(true);
             } else {
-              setGameScore("win");
+              setGameScore('win');
               getRewards();
               setDisplayPopUp(true);
             }
           } else if (deckValue > 21) {
-            setGameScore("win");
+            setGameScore('win');
             getRewards();
             setDisplayPopUp(true);
           } else if (deckValue < 17) {
@@ -209,14 +210,14 @@ const GameScreen = () => {
       }
       // If the bank is lower than player
       else if (stockValue < playerDeckValue) {
-        setGameScore("win");
+        setGameScore('win');
         getRewards();
         setDisplayPopUp(true);
       }
       // If the bank is higher than player
       else if (stockValue >= playerDeckValue && stockValue <= 21) {
-        setGameScore("loose");
-        setDefeatType("bankHigher");
+        setGameScore('loose');
+        setDefeatType('bankHigher');
         setDisplayPopUp(true);
       }
     }, 2000);
@@ -268,14 +269,14 @@ const GameScreen = () => {
                 return (
                   <div className="hiddenCard" key={key}>
                     <img
-                      src={require("../../datas/cards/cards-images/backs-card/red_back.png")}
+                      src={require('../../datas/cards/cards-images/backs-card/red_back.png')}
                       className="bankCard face front"
                       alt="bank hidden card"
                     />
                     <img
                       src={require(`../../datas/cards/cards-images/${card.img}`)}
                       className={`bankCard face back ${
-                        showBankCard ? "showHiddenCard" : null
+                        showBankCard ? 'showHiddenCard' : null
                       }`}
                       alt="bank card"
                     />
@@ -289,7 +290,7 @@ const GameScreen = () => {
                   <img
                     key={key}
                     className="bankCard"
-                    style={{ marginLeft: "165px" }}
+                    style={{ marginLeft: '165px' }}
                     src={require(`../../datas/cards/cards-images/${card.img}`)}
                     alt="bank card"
                   />
@@ -312,11 +313,13 @@ const GameScreen = () => {
           // Bet selection before the game starts
           <form
             className="gameStartArea"
-            onSubmit={() => {
+            onSubmit={(e) => {
               if (playerBet && playerBet >= 50) {
+                e.preventDefault();
                 setBet();
               } else {
-                alert("You must select a bet to play");
+                alert('You must select a bet to play');
+                e.preventDefault();
               }
             }}
           >
@@ -342,7 +345,7 @@ const GameScreen = () => {
             <div className="buttonsAndValueContainer">
               {playerDeckValue ? (
                 <p className="deckValue">
-                  Total value:{" "}
+                  Total value:{' '}
                   <span className="deckValueSpan">{playerDeckValue}</span>
                 </p>
               ) : null}
